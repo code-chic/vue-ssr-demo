@@ -1,8 +1,16 @@
+const { createBundleRenderer } = require('vue-server-renderer')
 const express = require('express')
 const ejs = require('ejs').__express
 const historyApiFallback = require('connect-history-api-fallback')
 const __DIR__ = require('../shared/constant').__DIR__
 const { resolvePath } = require('../shared/util')
+const serverBundle = require('../dist/vue-ssr-server-bundle.json')
+const clientManifest = require('../dist/vue-ssr-client-manifest.json')
+
+const renderer = createBundleRenderer(serverBundle, {
+  runInNewContext: false,
+  clientManifest
+})
 
 const server = async () => {
   // 初始化 Express 并创建一个 HTTP 服务
@@ -27,7 +35,15 @@ server().then(server => {
   const router = server.router
   router.use(historyApiFallback({ index: '/', verbose: true }))
   router.get('/', (req, res) => {
-    res.render('index')
+    const context = { url: req.originalUrl }
+    // eslint-disable-next-line handle-callback-err
+    renderer.renderToString(context, (err, html) => {
+      // eslint-disable-next-line handle-callback-err
+      res.render('index', { serverContent: html }, (err, data) => {
+        data = data.replace('<!--vue-ssr-outlet-->', html)
+        res.send(data)
+      })
+    })
   })
 
   server.app.listen(3000, () => {

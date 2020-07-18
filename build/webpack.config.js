@@ -15,6 +15,7 @@ const {
  * @returns { webpack.Configuration }
  */
 module.exports = env => {
+  process.env.NODE_ENV = process.env.BABEL_ENV = env
   const isEnvProduction = env === 'production'
   const isEnvDevelopment = env === 'development'
   // eslint-disable-next-line no-unused-vars

@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.about {
   color: blue;
 }
 </style>

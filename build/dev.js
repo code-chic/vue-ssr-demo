@@ -35,10 +35,7 @@ const devOption = merge(baseOption, {
     historyApiFallback: true,
     hot: true,
     open: true,
-    overlay: {
-      warnings: true,
-      errors: true
-    },
+    overlay: false,
     watchOptions: {
       poll: 2000
     }

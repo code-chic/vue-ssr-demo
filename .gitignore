@@ -1,0 +1,10 @@
+# git ignore directory items
+.idea
+node_modules
+report*
+coverage
+
+# git ignore file items
+.DS_Store
+package-lock.json
+yarn.lock

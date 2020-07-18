@@ -1,6 +1,7 @@
 # git ignore directory items
 .idea
 node_modules
+dist
 report*
 coverage
 

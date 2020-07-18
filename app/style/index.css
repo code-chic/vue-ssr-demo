@@ -1,0 +1,30 @@
+@import "~normalize.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* 使用 ie 盒子模型 */
+}
+
+body {
+  font: 14px/20px Arial;
+  color: #333;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.clearfix::before, .clearfix::after {
+  display: inline-table;
+  width: auto;
+  height: 0;
+  *zoom: 1;
+  overflow: hidden;
+  clear: both;
+  content: "";
+}

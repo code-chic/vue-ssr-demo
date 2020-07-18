@@ -87,7 +87,6 @@ module.exports = env => {
           exclude: /node_modules/,
           loader: require.resolve('babel-loader'),
           options: {
-            optional: 'runtime',
             cacheDirectory: true
           }
         },
@@ -114,7 +113,7 @@ module.exports = env => {
         },
         {
           test: /\.(png|gif|jpg)$/,
-          include: require.resolve('app'),
+          include: resolvePath('app'),
           loader: require.resolve('url-loader'),
           options: {
             esModule: false,

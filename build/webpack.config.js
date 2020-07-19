@@ -134,7 +134,9 @@ module.exports = env => {
         chunkFilename: 'css/[id].[contenthash:6].css',
         publicPath: 'css'
       }),
-      new BundleAnalyzerPlugin({
+      // 生产环境 or 开发环境时自动生成报告，生成报告时需要较长的时间
+      // 所以它不太适合在开发环境下运行
+      isEnvProduction && isEnvTest && new BundleAnalyzerPlugin({
         analyzerMode: 'static',
         generateStatsFile: true,
         reportFilename: resolvePath('reports/reports.html'),

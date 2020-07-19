@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <p>{{ item }}</p>
+    <p>{{ fooCount }}</p>
     <button type="button" @click="addTestDataHandle">test xhr</button>
     <button type="button" @click="getTestDataHandle">test mock xhr</button>
     <button type="button">test xhr timeout</button>
@@ -11,16 +11,13 @@
 <script>
 import { getTestData, addTestData } from '@/api/test.api'
 import HelloWorld from '@/components/HelloWorld'
+import fooStoreModule from '@/core/store/modules/foo'
+
 export default {
   name: 'Home',
-  data () {
-    return {
-      name: '这里是动态数据绑定'
-    }
-  },
   asyncData ({ store }) {
-    // 在触发 action 后， 会返回 Promise
-    return store.dispatch('fetchItem', 1)
+    store.registerModule('foo', fooStoreModule)
+    return store.dispatch('foo/inc')
   },
   components: {
     HelloWorld
@@ -35,10 +32,15 @@ export default {
       console.log(result)
     }
   },
+  // 重要信息：当多次访问路由时
+  // 避免在客户端重复注册模块
+  destroyed () {
+    this.$store.unregisterModule('foo')
+  },
   computed: {
-    // 从 store 的 state 对象中的获取 item
-    item () {
-      return this.$store.state.items[1]
+    fooCount () {
+      console.log(this.$store)
+      return this.$store.state.foo.count
     }
   }
 }

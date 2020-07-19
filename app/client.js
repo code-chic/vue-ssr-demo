@@ -1,6 +1,6 @@
-import initApp from '@/core/main'
+import { createApp } from '@/core/main'
 
-const { app: vm, router, store } = initApp()
+const { app: vm, router, store } = createApp()
 
 router.onReady(() => {
   router.beforeResolve((to, from, next) => {

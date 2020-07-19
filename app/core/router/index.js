@@ -7,7 +7,6 @@ Vue.use(VueRouter)
 
 export function createRouter () {
   return new VueRouter({
-    baseURL: '',
     mode: 'history',
     routes: [{
       path: '/',

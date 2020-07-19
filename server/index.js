@@ -1,7 +1,7 @@
-const { createBundleRenderer } = require('vue-server-renderer')
 const express = require('express')
 const ejs = require('ejs').__express
 const historyApiFallback = require('connect-history-api-fallback')
+const { createBundleRenderer } = require('vue-server-renderer')
 const __DIR__ = require('../shared/constant').__DIR__
 const { resolvePath } = require('../shared/util')
 const serverBundle = require('../dist/vue-ssr-server-bundle.json')
@@ -39,7 +39,7 @@ server().then(server => {
     // eslint-disable-next-line handle-callback-err
     renderer.renderToString(context, (err, html) => {
       // eslint-disable-next-line handle-callback-err
-      res.render('index', { serverContent: html }, (err, data) => {
+      res.render('index', (err, data) => {
         data = data.replace('<div id="app"></div>', html)
         res.send(data)
       })

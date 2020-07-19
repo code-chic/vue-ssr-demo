@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/home/index'
-import About from '@/views/about/index'
 
 // 安装路由组件
 Vue.use(VueRouter)
@@ -19,8 +18,7 @@ export function createRouter () {
       }
     }, {
       path: '/about',
-      // component: () => import('@/views/about/index'),
-      component: About,
+      component: () => import('@/views/about/index'),
       meta: {
         title: '关于我们'
       }

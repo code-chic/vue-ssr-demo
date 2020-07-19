@@ -40,7 +40,7 @@ server().then(server => {
     renderer.renderToString(context, (err, html) => {
       // eslint-disable-next-line handle-callback-err
       res.render('index', { serverContent: html }, (err, data) => {
-        data = data.replace('<!--vue-ssr-outlet-->', html)
+        data = data.replace('<div id="app"></div>', html)
         res.send(data)
       })
     })

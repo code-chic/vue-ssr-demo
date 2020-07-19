@@ -1,9 +1,27 @@
 const { merge } = require('webpack-merge')
-const nodeExternals = require('webpack-node-externals')
 const baseOption = require('./webpack.config')('production')
 const VueSSRServerPlugin = require('vue-server-renderer/server-plugin')
 const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const { resolvePath } = require('../shared/util')
+
+const { module: { rules } } = baseOption
+rules.forEach((rule, index) => {
+  if (rule.test.toString() === '/\\.css$/') {
+    rules.splice(index, 1, {
+      test: /\.css$/,
+      include: resolvePath('app'),
+      use: [
+        'vue-style-loader',
+        {
+          loader: require.resolve('css-loader'),
+          options: {
+            sourceMap: true
+          }
+        }
+      ]
+    })
+  }
+})
 
 const smp = new SpeedMeasurePlugin()
 
@@ -16,10 +34,6 @@ const ssrServerOption = merge(baseOption, {
   output: {
     libraryTarget: 'commonjs2'
   },
-
-  externals: nodeExternals({
-    allowlist: /\.css$/
-  }),
 
   plugins: [
     new VueSSRServerPlugin()

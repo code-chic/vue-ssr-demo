@@ -8,6 +8,11 @@ const smp = new SpeedMeasurePlugin()
 
 const ssrClientOption = merge(baseOption, {
   entry: resolvePath('app/client.js'),
+
+  output: {
+    filename: 'js/ssr-client.js'
+  },
+
   plugins: [
     new VueSSRClientPlugin()
   ]

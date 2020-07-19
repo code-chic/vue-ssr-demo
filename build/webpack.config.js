@@ -94,7 +94,7 @@ module.exports = env => {
           test: /\.css$/,
           include: resolvePath('app'),
           use: [
-            isEnvDevelopment ? 'style-loader' : MiniCssExtractPlugin.loader,
+            isEnvDevelopment ? 'vue-style-loader' : MiniCssExtractPlugin.loader,
             {
               loader: require.resolve('css-loader'),
               options: {

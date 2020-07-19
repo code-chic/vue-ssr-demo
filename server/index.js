@@ -40,7 +40,7 @@ server().then(server => {
     renderer.renderToString(context, (err, html) => {
       // eslint-disable-next-line handle-callback-err
       res.render('index', (err, data) => {
-        data = data.replace('<div id="app"></div>', html)
+        data = data.replace('<div id="app"></div>', `<div id="app">${html}</div>`)
         res.send(data)
       })
     })

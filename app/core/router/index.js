@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import registerRouterHooks from '@/core/router/hooks'
 import Home from '@/views/home/index'
 
 // 安装路由组件
 Vue.use(VueRouter)
 
 export function createRouter () {
-  return new VueRouter({
+  const router = new VueRouter({
     mode: 'history',
     routes: [{
       path: '/',
@@ -19,8 +20,12 @@ export function createRouter () {
       path: '/about',
       component: () => import('@/views/about/index'),
       meta: {
-        title: '关于我们'
+        title: '关于我们',
+        isCheckLogin: true
       }
     }]
   })
+
+  registerRouterHooks(router)
+  return router
 }

@@ -13,5 +13,11 @@ exports.__MYSQL_DB_PORT__ = 3306
 // Mysql 数据库名称
 exports.__MYSQL_DB_DATABASE__ = 'vue-ssr-demo'
 
+// Mysql 用户名
+exports.__MYSQL_DB_USER__ = 'root'
+
+// Mysql 登录密码
+exports.__MYSQL_DB_PASSWORD__ = '******'
+
 // 是否开启服务端渲染，默认开启
 exports._IS_SERVER_RENDERER__ = true

@@ -8,9 +8,10 @@
   <%htmlWebpackPlugin.options.externals.scripts.forEach(script => {%>
   <script src="<%=script.assetUrl%>" type="text/javascript"></script>
   <%})%>
+  <!--vue-ssr-state-->
 </head>
 <body>
   <noscript>您的浏览器不支持JavaScript，请升级或检查是否禁止运行</noscript>
-  <div id="app"></div>
+  <div id="app"><!--vue-ssr-outlet--></div>
 </body>
 </html>

@@ -11,11 +11,9 @@ router.onReady(() => {
     const activated = matched.filter((c, i) => {
       return diffed || (diffed = (prevMatched[i] !== c))
     })
-
     if (!activated.length) {
       return next()
     }
-
     // 这里如果有加在指示器，就触发
     Promise.all(activated.map(c => {
       /**

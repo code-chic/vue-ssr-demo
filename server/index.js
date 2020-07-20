@@ -2,7 +2,7 @@ const express = require('express')
 const ejs = require('ejs').__express
 const historyApiFallback = require('connect-history-api-fallback')
 const { createBundleRenderer } = require('vue-server-renderer')
-const __DIR__ = require('../shared/constant').__DIR__
+const __ROOT__ = require('../shared/constant').__ROOT__
 const { resolvePath } = require('../shared/util')
 const serverBundle = require('../dist/vue-ssr-server-bundle.json')
 const clientManifest = require('../dist/vue-ssr-client-manifest.json')
@@ -19,9 +19,9 @@ const server = async () => {
 
   // 安装 express 中间件
   app.use(router)
-  app.use(express.static(resolvePath(__DIR__)))
+  app.use(express.static(resolvePath(__ROOT__)))
   // 指定 express 模板引擎
-  app.set('views', resolvePath(__DIR__))
+  app.set('views', resolvePath(__ROOT__))
   app.set('view engine', 'html')
   app.engine('html', ejs)
 
@@ -39,13 +39,13 @@ server().then(server => {
     // eslint-disable-next-line handle-callback-err
     renderer.renderToString(context, (err, html) => {
       // eslint-disable-next-line handle-callback-err
-      res.render('index', (err, data) => {
-        data = data.replace('<div id="app"></div>', `<div id="app">${html}</div>`)
+      res.render('index', { context }, (err, data) => {
+        data = data.replace('<!--vue-ssr-state-->', `<script>window.__INITIAL_STATE__ = ${JSON.stringify(context.state)}</script>`)
+        data = data.replace('<!--vue-ssr-outlet-->', html)
         res.send(data)
       })
     })
   })
-
   server.app.listen(3000, () => {
     console.log('Server runint at http://localhost:3000')
   })

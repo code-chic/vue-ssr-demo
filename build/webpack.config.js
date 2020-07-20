@@ -5,7 +5,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const { resolvePath } = require('../shared/util')
 
 const {
-  __DIR__,
+  __ROOT__,
   __CDN_URL__
 } = require('../shared/constant')
 
@@ -24,14 +24,14 @@ module.exports = env => {
   const getAssetOutput = () => {
     if (isEnvDevelopment) {
       return {
-        path: resolvePath(__DIR__),
+        path: resolvePath(__ROOT__),
         filename: '[name].js',
         chunkFilename: '[id].js',
         publicPath: ''
       }
     }
     return {
-      path: resolvePath(__DIR__),
+      path: resolvePath(__ROOT__),
       filename: 'js/[name].[contenthash:6].js',
       chunkFilename: 'js/[id].[contenthash:6].js',
       publicPath: __CDN_URL__

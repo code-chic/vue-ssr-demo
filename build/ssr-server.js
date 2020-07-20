@@ -28,13 +28,10 @@ const smp = new SpeedMeasurePlugin()
 const ssrServerOption = merge(baseOption, {
   // 将 entry 指向应用程序的 server entry 文件
   entry: resolvePath('app/server.js'),
-
   target: 'node',
-
   output: {
     libraryTarget: 'commonjs2'
   },
-
   plugins: [
     new VueSSRServerPlugin()
   ]

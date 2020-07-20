@@ -20,6 +20,12 @@ const buildOption = merge(baseOption, {
       title: 'My Vue.js',
       template: resolvePath('public/index.prod.html'),
       filename: 'index.html',
+      minify: {
+        collapseWhitespace: true,
+        sortAttributes: true,
+        sortClassName: true,
+        removeComments: false
+      },
       externals: {
         scripts: externalScriptConfigs
       }

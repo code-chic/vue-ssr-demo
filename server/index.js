@@ -12,6 +12,8 @@ const renderer = createBundleRenderer(serverBundle, {
   clientManifest
 })
 
+const { registerController } = require('./controllers/index')
+
 const server = async () => {
   // 初始化 Express 并创建一个 HTTP 服务
   const app = express()
@@ -34,6 +36,9 @@ const server = async () => {
 server().then(server => {
   const router = server.router
   router.use(historyApiFallback({ index: '/', verbose: true }))
+
+  registerController(router)
+
   router.get('/', (req, res) => {
     const context = { url: req.originalUrl }
     // eslint-disable-next-line handle-callback-err

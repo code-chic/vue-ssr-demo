@@ -5,3 +5,6 @@ export const getTestData = params => fetch.doGet('/test/getTestData', params)
 
 // 新增测试数据接口
 export const addTestData = params => fetch.doPost('/test/addTestData', params)
+
+// 获取测试用户信息
+export const getTestUserInfo = () => fetch.doPost('/test/getTestUserInfo')

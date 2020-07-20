@@ -3,13 +3,13 @@
     <p>{{ fooCount }}</p>
     <button type="button" @click="addTestDataHandle">test xhr</button>
     <button type="button" @click="getTestDataHandle">test mock xhr</button>
-    <button type="button">test xhr timeout</button>
+    <button type="button" @click="getRealTestDataHandle">get real api data</button>
     <HelloWorld />
   </div>
 </template>
 
 <script>
-import { getTestData, addTestData } from '@/api/test.api'
+import { getTestData, addTestData, getTestUserInfo } from '@/api/test.api'
 import HelloWorld from '@/components/HelloWorld'
 import fooStoreModule from '@/core/store/modules/foo'
 
@@ -29,7 +29,12 @@ export default {
     },
     async addTestDataHandle () {
       const result = await addTestData({ name: '张大炮', age: 22 })
-      console.log(result)
+      console.log('mock data: ', result)
+    },
+    // 从真实接口中获取数据
+    async getRealTestDataHandle () {
+      const result = await getTestUserInfo()
+      console.log('real data: ', result)
     }
   },
   // 重要信息：当多次访问路由时
@@ -39,7 +44,6 @@ export default {
   },
   computed: {
     fooCount () {
-      console.log(this.$store)
       return this.$store.state.foo.count
     }
   }

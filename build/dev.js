@@ -1,3 +1,4 @@
+const fs = require('fs')
 const { merge } = require('webpack-merge')
 const webpack = require('webpack')
 const HtmlPlugin = require('html-webpack-plugin')
@@ -10,6 +11,7 @@ const { resolvePath } = require('../shared/util')
 const HOST = process.env.HOST || '127.0.0.1'
 const PORT = process.env.PORT || 8080
 const smp = new SpeedMeasurePlugin()
+const setupProxy = resolvePath('app/setupProxy.js')
 
 const devOption = merge(baseOption, {
   plugins: [
@@ -33,6 +35,11 @@ const devOption = merge(baseOption, {
     port: PORT,
     clientLogLevel: 'info',
     historyApiFallback: true,
+    before (app) {
+      if (fs.existsSync(setupProxy)) {
+        require(setupProxy)(app)
+      }
+    },
     hot: true,
     open: true,
     overlay: false,

@@ -18,7 +18,6 @@ export default {
   },
   mutations: {
     inc: (state, count) => {
-      console.log('count: ', count)
       state.count = count
     }
   }

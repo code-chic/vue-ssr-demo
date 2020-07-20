@@ -98,6 +98,13 @@ module.exports = env => {
             {
               loader: require.resolve('css-loader'),
               options: {
+                importLoaders: 1,
+                sourceMap: true
+              }
+            },
+            {
+              loader: require.resolve('postcss-loader'),
+              options: {
                 sourceMap: true
               }
             }

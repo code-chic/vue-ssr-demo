@@ -8,6 +8,9 @@ const instance = axios.create({
   method: 'POST', // 指定 axios 默认请求方式
   responseType: 'json', // 默认采用 json 格式交互
   paramsSerializer: params => qs.stringify(params, { arrayFormat: 'brackets' }), // 参数序列化
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  },
   validateStatus: status => status >= 200 || status < 300, // 验证响应状态
   xsrfCookieName: 'XSRF-COOKIE-CUSTOM',
   timeout: Config.tiemout || 1000, // 设置 api 请求超时时间

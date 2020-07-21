@@ -21,7 +21,7 @@ export function createRouter () {
       component: () => import('@/views/about/index'),
       meta: {
         title: '关于我们',
-        isCheckLogin: true
+        isCheckLogin: false
       }
     }]
   })

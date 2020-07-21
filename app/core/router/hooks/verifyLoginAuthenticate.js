@@ -26,7 +26,7 @@ export default function verifyLoginAuthenticate (router) {
         next(result ? undefined : {
           path: '/login',
           query: {
-            sourceUrl: from.fullPath
+            sourceUrl: from.currentRoute.fullPath
           }
         })
       }).catch(error => {

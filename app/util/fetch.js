@@ -24,26 +24,6 @@ if (process.env.NODE_ENV === 'development') {
   mockAdapter(instance)
 }
 
-// 自定义请求拦截器
-instance.interceptors.request.use(
-  data => {
-    return data
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
-
-// 自定义响应拦截器
-instance.interceptors.response.use(
-  response => {
-    return response
-  },
-  error => {
-    return Promise.reject(error)
-  }
-)
-
 // 导出 get 请求方法
 export const doGet = (url, params) => instance.get(url, { params })
 

@@ -16,7 +16,7 @@
           <td>{{ item.id }}</td>
           <td>{{ item.name }}</td>
           <td>{{ item.age }}</td>
-          <td>{{ item.sex }}</td>
+          <td>{{ item.sex | formatSexHandle }}</td>
         </tr>
       </tbody>
     </table>
@@ -35,6 +35,12 @@ export default {
 
   destroyed () {
     this.$store.unregisterModule('test')
+  },
+
+  filters: {
+    formatSexHandle (sex) {
+      return sex === 1 ? '男' : '女'
+    }
   },
 
   computed: {
